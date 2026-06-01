@@ -1,0 +1,229 @@
+﻿<Window x:Class="AnatomyOfSport.MyWorkoutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Моя тренировка" 
+        Height="550" Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="10"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleX" 
+                                                 To="1.05" Duration="0:0:0.1"/>
+                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" 
+                                                 To="1.05" Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleX" 
+                                                 To="1" Duration="0:0:0.1"/>
+                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" 
+                                                 To="1" Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя полоска -->
+        <Border Grid.Row="0" Background="#235347">
+            <Grid>
+                <TextBlock Text="Моя тренировка" 
+                           FontFamily="Comic Sans MS"
+                           FontSize="16" FontWeight="Bold" 
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="10,0,0,0"/>
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Center"
+                            Margin="0,0,10,0">
+                    <Button x:Name="MinimizeButton" Content="─" Width="30" Height="30"
+                            Background="Transparent" Foreground="White" FontSize="16"
+                            Cursor="Hand" BorderThickness="0"/>
+                    <Button x:Name="CloseButton" Content="✕" Width="30" Height="30"
+                            Background="Transparent" Foreground="White" FontSize="16"
+                            Cursor="Hand" BorderThickness="0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Основной фон -->
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#479783" Offset="0"/>
+                    <GradientStop Color="#FFF5F5DC" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <!-- Кнопка НАЗАД -->
+            <Button x:Name="BackButton"
+                    Content="← НАЗАД"
+                    Width="100" Height="30"
+                    FontFamily="Comic Sans MS" FontSize="14"
+                    Background="#235347" Foreground="#FFF5F5DC"
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Margin="20,20,0,0" Cursor="Hand"/>
+
+            <!-- Кнопка ПОМОЩЬ -->
+            <Button x:Name="HelpButton"
+                    Content="ПОМОЩЬ"
+                    Width="100" Height="30"
+                    FontFamily="Comic Sans MS" FontSize="14"
+                    Background="#235347" Foreground="#FFF5F5DC"
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Margin="0,20,20,0" Cursor="Hand"/>
+
+            <!-- Заголовок -->
+            <TextBlock Text="СОБРАННАЯ ТРЕНИРОВКА"
+                       FontFamily="Comic Sans MS"
+                       FontSize="36" FontWeight="Bold"
+                       Foreground="#FFF5F5DC"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       Margin="0,50,0,0"/>
+
+            <!-- Список упражнений — ItemsControl вместо StackPanel -->
+            <ScrollViewer VerticalAlignment="Top"
+                          Margin="50,120,50,0" Height="233"
+                          VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="ExercisesList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="#235347"
+                                    CornerRadius="15"
+                                    Padding="20"
+                                    Margin="0,0,0,15">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Название + кнопка удалить -->
+                                    <Grid Grid.Row="0">
+                                        <TextBlock Text="{Binding ExerciseName}"
+                                                   FontFamily="Comic Sans MS"
+                                                   FontSize="18" FontWeight="Bold"
+                                                   Foreground="White"
+                                                   VerticalAlignment="Center"/>
+                                        <Button Content="УДАЛИТЬ"
+                                                Width="100" Height="35"
+                                                FontSize="12" FontWeight="Bold"
+                                                Background="#E94560"
+                                                Foreground="White"
+                                                HorizontalAlignment="Right"
+                                                Cursor="Hand"
+                                                Tag="{Binding}"
+                                                Click="DeleteButton_Click"/>
+                                    </Grid>
+
+                                    <!-- Подходы и повторения -->
+                                    <Grid Grid.Row="1" Margin="0,15,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="0" 
+                                                    Orientation="Horizontal">
+                                            <TextBlock Text="Подходы:"
+                                                       FontFamily="Comic Sans MS"
+                                                       FontSize="14" Foreground="White"
+                                                       VerticalAlignment="Center"
+                                                       Margin="0,0,10,0"/>
+                                            <ComboBox x:Name="SetsCombo"
+                                                      Width="80" Height="30" FontSize="14"
+                                                      Tag="{Binding}"
+                                                      SelectionChanged="SetsCombo_Changed"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="1" 
+                                                    Orientation="Horizontal">
+                                            <TextBlock Text="Повторений:"
+                                                       FontFamily="Comic Sans MS"
+                                                       FontSize="14" Foreground="White"
+                                                       VerticalAlignment="Center"
+                                                       Margin="0,0,10,0"/>
+                                            <ComboBox x:Name="RepsCombo"
+                                                      Width="80" Height="30" FontSize="14"
+                                                      Tag="{Binding}"
+                                                      SelectionChanged="RepsCombo_Changed"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <!-- Кнопка НАЧАТЬ ТРЕНИРОВКУ -->
+            <Button x:Name="StartWorkoutButton"
+                    Content="▶ НАЧАТЬ ТРЕНИРОВКУ"
+                    Width="250" Height="50"
+                    FontFamily="Comic Sans MS"
+                    FontSize="16" FontWeight="Bold"
+                    Background="#32AD2B" Foreground="White"
+                    Cursor="Hand"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,382,0,0"/>
+
+            <!-- Нижние кнопки -->
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="0,0,0,20">
+                <Button x:Name="HomeButton" Content="ГЛАВНАЯ"
+                        FontFamily="Comic Sans MS" Width="127" Height="35"
+                        FontSize="14" Background="#235347" Foreground="#FFF5F5DC"
+                        Cursor="Hand" Margin="0,0,100,0"/>
+                <Button x:Name="HistoryButton" Content="ИСТОРИЯ"
+                        FontFamily="Comic Sans MS" Width="127" Height="35"
+                        FontSize="14" Background="#235347" Foreground="#FFF5F5DC"
+                        Cursor="Hand" Margin="0,0,100,0"/>
+                <Button x:Name="LibraryButton" Content="БИБЛИОТЕКА"
+                        FontFamily="Comic Sans MS" Width="120" Height="35"
+                        FontSize="14" Background="#235347" Foreground="#FFF5F5DC"
+                        Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

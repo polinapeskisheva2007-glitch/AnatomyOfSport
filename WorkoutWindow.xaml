@@ -1,0 +1,358 @@
+﻿<Window x:Class="AnatomyOfSport.WorkoutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Активная тренировка" 
+        Height="550" Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="10"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleX" 
+                                                 To="1.05" Duration="0:0:0.1"/>
+                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" 
+                                                 To="1.05" Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleX" 
+                                                 To="1" Duration="0:0:0.1"/>
+                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" 
+                                                 To="1" Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя полоска -->
+        <Border Grid.Row="0" Background="#235347">
+            <Grid>
+                <TextBlock Text="Активная тренировка" 
+                           FontFamily="Comic Sans MS"
+                           FontSize="16" 
+                           FontWeight="Bold" 
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="10,0,0,0"/>
+
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Center"
+                            Margin="0,0,10,0">
+                    <Button x:Name="MinimizeButton" Content="─" Width="30" Height="30"
+                            Background="Transparent" Foreground="White" FontSize="16"
+                            Cursor="Hand" BorderThickness="0"/>
+                    <Button x:Name="CloseButton" Content="✕" Width="30" Height="30"
+                            Background="Transparent" Foreground="White" FontSize="16"
+                            Cursor="Hand" BorderThickness="0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Основной фон -->
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#479783" Offset="0"/>
+                    <GradientStop Color="#FFF5F5DC" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <!-- Кнопка назад -->
+            <Button x:Name="BackButton"
+                    Content="← НАЗАД"
+                    Width="100" Height="30"
+                    FontFamily="Comic Sans MS"
+                    FontSize="14"
+                    Background="#235347"
+                    Foreground="#FFF5F5DC"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="20,20,0,0"
+                    Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="HelpButton"
+        Content="ПОМОЩЬ"
+        Width="100" Height="30"
+        FontFamily="Comic Sans MS"
+        FontSize="14"
+        Background="#235347"
+        Foreground="#FFF5F5DC"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        Margin="0,20,20,0"
+        Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <!-- Название упражнения -->
+            <Border Width="480" Height="43"
+                    Background="#235347"
+                    CornerRadius="15"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,45,0,0">
+                <TextBlock x:Name="ExerciseNameTextBlock" 
+                           Text="Упражнение"
+                           FontFamily="Comic Sans MS"
+                           FontSize="24" 
+                           FontWeight="Bold" 
+                           Foreground="#FFF5F5DC"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Border>
+
+            <!-- Таймер -->
+            <Border Background="#235347" 
+                    CornerRadius="20" 
+                    Padding="20"
+                    Width="308"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="400,108,0,0" Height="172" RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.495"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="1.193"/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" 
+                               Text="⏱️ ТАЙМЕР"
+                               FontFamily="Comic Sans MS"
+                               FontSize="18" 
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,4"/>
+
+                    <TextBlock x:Name="TimerTextBlock" 
+                               Grid.Row="1"
+                               Text="00:00"
+                               FontFamily="Comic Sans MS"
+                               FontSize="46" 
+                               FontWeight="Bold"
+                               Foreground="#FFF5F5DC"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,6"/>
+
+                    <StackPanel Grid.Row="2" 
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Center">
+                        <Button x:Name="PauseButton"
+                                Content="ПАУЗА"
+                                Width="80" Height="30"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                Background="#32AD2B"
+                                Foreground="White"
+                                Cursor="Hand"
+                                Margin="0,0,10,0">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="20"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button x:Name="ResetButton"
+                                Content="СБРОС"
+                                Width="80" Height="30"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                Background="#32AD2B"
+                                Foreground="White"
+                                Cursor="Hand">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="20"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Видео -->
+            <Border Width="328" Height="321"
+        Background="#2A4040"
+        CornerRadius="20"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Margin="20,104,0,0"
+        BorderBrush="#235347"
+        BorderThickness="3">
+                <Grid>
+                    <!-- Видео для упражнения -->
+                    <MediaElement x:Name="ExerciseVideo"
+                      Stretch="Uniform"
+                      LoadedBehavior="Manual"
+                      UnloadedBehavior="Stop"
+                      IsMuted="True"
+                      Visibility="Collapsed"/>  
+
+                    <!-- Заглушка, если видео нет -->
+                    <TextBlock x:Name="VideoPlaceholder"
+                   Text="🎯 3D-модель тела&#x0a;"
+                   FontFamily="Comic Sans MS"
+                   FontSize="16"
+                   Foreground="#FFF5F5DC"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextAlignment="Center"
+                   Visibility="Visible"/>
+                </Grid>
+            </Border>
+
+            <!-- Информация об упражнении -->
+            <Border Background="#235347" 
+                    CornerRadius="20" 
+                    Padding="20"
+                    Width="309"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top" Margin="400,296,0,0" Height="129">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" 
+                               Text="ПОДХОДЫ И ПОВТОРЕНИЯ"
+                               FontFamily="Comic Sans MS"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Foreground="#FFF5F5DC"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,5"/>
+
+                    <TextBlock x:Name="SetsRepsTextBlock" 
+                               Grid.Row="1"
+                               Text="3 x 12"
+                               FontFamily="Comic Sans MS"
+                               FontSize="28" 
+                               FontWeight="Bold"
+                               Foreground="#FFF5F5DC"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,5"/>
+
+                    <TextBlock x:Name="ProgressTextBlock" 
+                               Grid.Row="2"
+                               Text="1 / 3 подходов"
+                               FontFamily="Comic Sans MS"
+                               FontSize="14"
+                               Foreground="#FFF5F5DC"
+                               HorizontalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- Нижние кнопки -->
+            <StackPanel Orientation="Horizontal" 
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Margin="87,440,0,0" Width="653">
+                <Button x:Name="CompleteSetButton"
+            Content="ЗАВЕРШИТЬ ПОДХОД"
+            Width="180" Height="50"
+            FontFamily="Comic Sans MS"
+            FontSize="14"
+            FontWeight="Bold"
+            Background="#32AD2B"
+            Foreground="White"
+            Cursor="Hand"
+            Margin="0,0,40,0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="20"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="SkipExerciseButton"
+            Content="ПРОПУСТИТЬ"
+            Width="180" Height="50"
+            FontFamily="Comic Sans MS"
+            FontSize="14"
+            FontWeight="Bold"
+            Background="#FF8C00"
+            Foreground="White"
+            Cursor="Hand"
+            Margin="0,0,40,0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="20"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="FinishWorkoutButton"
+            Content="ЗАВЕРШИТЬ"
+            Width="180" Height="50"
+            FontFamily="Comic Sans MS"
+            FontSize="14"
+            FontWeight="Bold"
+            Background="#E94560"
+            Foreground="White"
+            Cursor="Hand"
+            Margin="0,0,40,0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="20"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

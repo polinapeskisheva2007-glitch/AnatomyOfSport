@@ -1,0 +1,297 @@
+﻿<Window x:Class="AnatomyOfSport.SearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Поиск упражнений" 
+        Height="550" Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="10"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleX" 
+                                                 To="1.05" Duration="0:0:0.1"/>
+                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" 
+                                                 To="1.05" Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleX" 
+                                                 To="1" Duration="0:0:0.1"/>
+                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" 
+                                                 To="1" Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя полоска -->
+        <Border Grid.Row="0" Background="#235347">
+            <Grid>
+                <TextBlock Text="Поиск упражнений" 
+                           FontFamily="Comic Sans MS"
+                           FontSize="16" 
+                           FontWeight="Bold" 
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="10,0,0,0"/>
+
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Center"
+                            Margin="0,0,10,0">
+                    <Button x:Name="MinimizeButton" Content="─" Width="30" Height="30"
+                            Background="Transparent" Foreground="White" FontSize="16"
+                            Cursor="Hand" BorderThickness="0"/>
+                    <Button x:Name="CloseButton" Content="✕" Width="30" Height="30"
+                            Background="Transparent" Foreground="White" FontSize="16"
+                            Cursor="Hand" BorderThickness="0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Основной фон -->
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#479783" Offset="0"/>
+                    <GradientStop Color="#FFF5F5DC" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <!-- Кнопка назад -->
+            <Button x:Name="BackButton"
+                    Content="← НАЗАД"
+                    Width="100" Height="30"
+                    FontFamily="Comic Sans MS"
+                    FontSize="14"
+                    Background="#235347"
+                    Foreground="#FFF5F5DC"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="20,20,0,0"
+                    Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="HelpButton"
+        Content="ПОМОЩЬ"
+        Width="100" Height="30"
+        FontFamily="Comic Sans MS"
+        FontSize="14"
+        Background="#235347"
+        Foreground="#FFF5F5DC"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        Margin="0,20,20,0"
+        Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <!-- Заголовок -->
+            <TextBlock Text="🔍 ПОИСК УПРАЖНЕНИЙ"
+                       FontFamily="Comic Sans MS"
+                       FontSize="36" 
+                       FontWeight="Bold"
+                       Foreground="#FFF5F5DC"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       Margin="0,50,0,0"/>
+
+            <!-- Строка поиска -->
+            <TextBox x:Name="SearchBox"
+                 Width="400"
+                 Height="40"
+                 FontFamily="Comic Sans MS"
+                 FontSize="16"
+                 Background="White"
+                 BorderBrush="#235347"
+                 BorderThickness="2"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Top"
+                 Margin="0,120,0,0"
+                 Padding="10,0,10,0"
+                 TextChanged="SearchBox_TextChanged"/>
+
+            <!-- Фильтры -->
+            <Border Background="#235347" 
+                    CornerRadius="15" 
+                    Padding="15"
+                    Width="700"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,183,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" 
+                               Text="ФИЛЬТРЫ"
+                               FontFamily="Comic Sans MS"
+                               FontSize="16" 
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,15"/>
+
+                    <!-- Группы мышц (выпадающий список) -->
+                    <Grid Grid.Row="1" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" 
+                               Text="Группа мышц:"
+                               FontFamily="Comic Sans MS"
+                               FontSize="18"
+                               Foreground="#FFF5F5DC"
+                               VerticalAlignment="Center"
+                               Margin="0,0,20,0"/>
+
+                        <ComboBox x:Name="MuscleGroupComboBox"
+                              Grid.Column="1"
+                              Height="35"
+                              FontFamily="Comic Sans MS"
+                              FontSize="14"
+                              Background="White"
+                              SelectionChanged="MuscleGroupComboBox_SelectionChanged"
+                              VerticalAlignment="Center" Margin="112,0,112,0">
+                            <ComboBoxItem Content="Все группы" IsSelected="True"/>
+                        </ComboBox>
+                    </Grid>
+
+                    <!-- Оборудование (выпадающий список) -->
+                    <Grid Grid.Row="2" Margin="0,0,0,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" 
+                               Text="Оборудование:"
+                               FontFamily="Comic Sans MS"
+                               FontSize="18"
+                               Foreground="#FFF5F5DC"
+                               VerticalAlignment="Center"
+                               Margin="0,0,20,0"/>
+
+                        <ComboBox x:Name="EquipmentComboBox"
+                              Grid.Column="1"
+                              Height="35"
+                              FontFamily="Comic Sans MS"
+                              FontSize="14"
+                              Background="White"
+                              SelectionChanged="EquipmentComboBox_SelectionChanged"
+                              VerticalAlignment="Center" Margin="108,0,112,0">
+                            <ComboBoxItem Content="Всё оборудование" IsSelected="True"/>
+                        </ComboBox>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!-- Результаты -->
+            <ScrollViewer 
+                          VerticalAlignment="Top"
+                          Margin="50,350,50,0" Height="104">
+                <ListBox x:Name="ResultsListBox"
+                         Height="76"
+                         Background="White"
+                         BorderBrush="#235347"
+                         BorderThickness="2"
+                         FontFamily="Comic Sans MS"
+                         FontSize="16"
+                         SelectionChanged="ResultsListBox_SelectionChanged" Width="689"/>
+            </ScrollViewer>
+
+            <!-- Нижние кнопки -->
+            <StackPanel Orientation="Horizontal" 
+HorizontalAlignment="Center"
+VerticalAlignment="Bottom"
+Margin="0,0,0,20">
+                <Button x:Name="HomeButton"
+Content="ГЛАВНАЯ"
+FontFamily="Comic Sans MS"
+Width="120" Height="35"
+FontSize="14"
+Background="#235347"
+Foreground="#FFF5F5DC"
+Cursor="Hand"
+Margin="0,0,70,0"/>
+
+                <Button x:Name="LibraryButton"
+Content="БИБЛИОТЕКА"
+FontFamily="Comic Sans MS"
+Width="120" Height="35"
+FontSize="14"
+Background="#235347"
+Foreground="#FFF5F5DC"
+Cursor="Hand"
+Margin="0,0,70,0"/>
+
+                <Button x:Name="HistoryButton"
+Content="ИСТОРИЯ"
+FontFamily="Comic Sans MS"
+Width="120" Height="35"
+FontSize="14"
+Background="#235347"
+Foreground="#FFF5F5DC"
+Cursor="Hand"
+Margin="0,0,70,0"/>
+                <Button x:Name="MyWorkoutButton"
+Content="СВОЯ ТРЕНИРОВКА"
+FontFamily="Comic Sans MS"
+Width="146" Height="35"
+FontSize="14"
+Background="#235347"
+Foreground="#FFF5F5DC"
+Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
