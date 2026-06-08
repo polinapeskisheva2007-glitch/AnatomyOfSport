@@ -83,3 +83,4 @@ C:\Users\Gigabyte\Desktop\AnatomyOfSport\AnatomyOfSport\bin\Debug\net9.0-windows
 C:\Users\Gigabyte\Desktop\AnatomyOfSport\AnatomyOfSport\bin\Debug\net9.0-windows\Microsoft.Web.WebView2.WinForms.xml
 C:\Users\Gigabyte\Desktop\AnatomyOfSport\AnatomyOfSport\bin\Debug\net9.0-windows\Microsoft.Web.WebView2.Wpf.xml
 C:\Users\Gigabyte\Desktop\AnatomyOfSport\AnatomyOfSport\obj\Debug\net9.0-windows\AnatomyOfSport_Content.g.cs
+C:\Users\Gigabyte\Desktop\AnatomyOfSport\AnatomyOfSport\obj\Debug\net9.0-windows\AnatomyOfSport.sourcelink.json

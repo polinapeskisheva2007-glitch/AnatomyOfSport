@@ -30,7 +30,7 @@ namespace AnatomyOfSport
             CloseButton.Click += (s, e) => this.Close();// Кнопка закрытия окна
             BackButton.Click += (s, e) => { previousWindow?.Show(); this.Close(); }; // Кнопка "Назад" возврат к предыдущему окну
             HomeButton.Click += (s, e) => { new MainWindow().Show(); this.Close(); };// Кнопка "Главная"
-            HistoryButton.Click += (s, e) => { new HistoryWindow().Show(); this.Hide(); };// Кнопка "История"
+            HistoryButton.Click += (s, e) => { new HistoryWindow().Show(); this.Close(); };// Кнопка "История"
             HelpButton.Click += (s, e) => App.ShowHelp(81);
 
             this.KeyDown += (s, e) =>
@@ -48,7 +48,7 @@ namespace AnatomyOfSport
                     System.Windows.MessageBox.Show("Вы ещё не добавили ни одного упражнения.",
                         "Тренировка пуста", MessageBoxButton.OK, MessageBoxImage.Information);
                 else
-                { new MyWorkoutWindow().Show(); this.Hide(); }
+                { new MyWorkoutWindow().Show(); this.Close(); }
             };
         }
 

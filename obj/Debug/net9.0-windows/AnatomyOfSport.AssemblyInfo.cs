@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AnatomyOfSport")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2aed9d154d45ba61a59c87112392be4d484f59b5")]
 [assembly: System.Reflection.AssemblyProductAttribute("AnatomyOfSport")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AnatomyOfSport")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -27,7 +27,7 @@ namespace AnatomyOfSport
             BackButton.Click += (s, e) => { new MainWindow().Show(); this.Close(); };// Кнопка "Назад"
             HomeButton.Click += (s, e) => { new MainWindow().Show(); this.Close(); };// Кнопка "Главная"
             LibraryButton.Click += (s, e) => { new LibraryWindow().Show(); this.Close(); };// Кнопка "Библиотека"
-            HistoryButton.Click += (s, e) => { new HistoryWindow().Show(); this.Hide(); };// Кнопка "История"
+            HistoryButton.Click += (s, e) => { new HistoryWindow().Show(); this.Close(); };// Кнопка "История"
 
             HelpButton.Click += (s, e) => App.ShowHelp(79);
 
@@ -46,7 +46,7 @@ namespace AnatomyOfSport
                     System.Windows.MessageBox.Show("Вы ещё не добавили ни одного упражнения.",
                         "Тренировка пуста", MessageBoxButton.OK, MessageBoxImage.Information);
                 else
-                { new MyWorkoutWindow().Show(); this.Hide(); }
+                { new MyWorkoutWindow().Show(); this.Close(); }
             };
         }
         // Загружает доступные фильтры

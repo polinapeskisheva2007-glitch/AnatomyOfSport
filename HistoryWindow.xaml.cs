@@ -48,7 +48,7 @@ namespace AnatomyOfSport
                     System.Windows.MessageBox.Show("Вы ещё не добавили ни одного упражнения.",
                         "Тренировка пуста", MessageBoxButton.OK, MessageBoxImage.Information);
                 else
-                { new MyWorkoutWindow().Show(); this.Hide(); }
+                { new MyWorkoutWindow().Show(); this.Close(); }
             };
         }
     }
