@@ -142,7 +142,7 @@
 
             <!-- Кнопка FULL BODY -->
             <Button x:Name="FullBodyButton"
-                    Content="🏋️ FULL BODY (ВСЁ ТЕЛО)"
+                    Content="🏋️ ВСЁ ТЕЛО"
                     Width="382" Height="79"
                     FontFamily="Comic Sans MS"
                     FontSize="18"

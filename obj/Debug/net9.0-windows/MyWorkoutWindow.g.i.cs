@@ -125,7 +125,7 @@ namespace AnatomyOfSport {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AnatomyOfSport;component/myworkoutwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AnatomyOfSport;V1.0.0.0;component/myworkoutwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\MyWorkoutWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

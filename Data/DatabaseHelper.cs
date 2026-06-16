@@ -10,7 +10,18 @@ namespace AnatomyOfSport.Data
     public class DatabaseHelper
     {
         // Строка подключения к БД
-        private const string ConnectionString = "Data Source=anatomy.db;Version=3;";
+        private readonly string ConnectionString;
+
+        // Конструктор по умолчанию — использует основную базу anatomy.db
+        public DatabaseHelper()
+        {
+            ConnectionString = "Data Source=anatomy.db;Version=3;";
+        }
+        // Конструктор для тестов — позволяет указать свой путь 
+        public DatabaseHelper(string dbPath)
+        {
+            ConnectionString = $"Data Source={dbPath};Version=3;";
+        }
 
         // Проверка существования БД
         public bool DatabaseExists() => File.Exists("anatomy.db");

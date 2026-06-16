@@ -173,7 +173,7 @@ namespace AnatomyOfSport {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AnatomyOfSport;component/exercisecardwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AnatomyOfSport;V1.0.0.0;component/exercisecardwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ExerciseCardWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
